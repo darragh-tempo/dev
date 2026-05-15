@@ -1,7 +1,14 @@
 {
-  "rewrites": [
+  "redirects": [
     {
       "source": "/performance",
+      "destination": "/performance/",
+      "permanent": true
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/performance/",
       "destination": "https://tempo-performance.vercel.app/"
     },
     {
