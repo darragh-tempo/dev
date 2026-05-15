@@ -1,0 +1,12 @@
+{
+  "rewrites": [
+    {
+      "source": "/performance",
+      "destination": "https://tempo-performance.vercel.app/"
+    },
+    {
+      "source": "/performance/:path*",
+      "destination": "https://tempo-performance.vercel.app/:path*"
+    }
+  ]
+}
