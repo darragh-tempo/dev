@@ -300,6 +300,96 @@
   </div>
 </section>
 
+<!-- ─── VIDEO TESTIMONIALS ─── -->
+<section class="py-24 px-6 bg-black section-divider">
+  <div class="max-w-[1200px] mx-auto">
+    <div class="text-center mb-14">
+      <span class="text-[11px] tracking-[0.25em] uppercase font-semibold" style="color:#7B2AE8;">Testimonials</span>
+      <h2 class="text-[42px] md:text-[52px] font-black leading-tight tracking-[-0.025em] text-white mt-4">
+        Client Success Stories
+      </h2>
+      <p class="text-[15px] text-white/60 mt-3 italic">
+        Hear from some of our diamonds.
+      </p>
+    </div>
+
+    <div class="relative">
+      <button id="video-prev" aria-label="Previous" class="hidden md:flex absolute left-0 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur items-center justify-center transition">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+
+      <div class="overflow-hidden mx-auto" style="max-width:900px;">
+        <div id="video-track" class="flex transition-transform duration-500 ease-out gap-4 md:gap-6" style="transform:translateX(0);">
+          <div class="video-card flex-shrink-0 w-[260px] md:w-[280px] aspect-[9/16] rounded-2xl overflow-hidden bg-[#111] transition-all duration-500">
+            <iframe class="w-full h-full" src="https://www.youtube.com/embed/OOh4vykdW0A?rel=0&modestbranding=1" title="Benji — TEMPO Diamond" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+          <div class="video-card flex-shrink-0 w-[260px] md:w-[280px] aspect-[9/16] rounded-2xl overflow-hidden bg-[#111] transition-all duration-500">
+            <iframe class="w-full h-full" src="https://www.youtube.com/embed/D_lg2fsInQM?rel=0&modestbranding=1" title="Darragh — TEMPO Diamond" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+          <div class="video-card flex-shrink-0 w-[260px] md:w-[280px] aspect-[9/16] rounded-2xl overflow-hidden bg-[#111] transition-all duration-500">
+            <iframe class="w-full h-full" src="https://www.youtube.com/embed/3kVXxufj_Ks?rel=0&modestbranding=1" title="Hugo — TEMPO Diamond" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+        </div>
+      </div>
+
+      <button id="video-next" aria-label="Next" class="hidden md:flex absolute right-0 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur items-center justify-center transition">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+    </div>
+
+    <div id="video-dots" class="flex justify-center gap-2 mt-8">
+      <button data-idx="0" class="video-dot w-2 h-2 rounded-full bg-white/30 transition" aria-label="Slide 1"></button>
+      <button data-idx="1" class="video-dot w-2 h-2 rounded-full bg-white/30 transition" aria-label="Slide 2"></button>
+      <button data-idx="2" class="video-dot w-2 h-2 rounded-full bg-white/30 transition" aria-label="Slide 3"></button>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const track = document.getElementById('video-track');
+      const cards = track.querySelectorAll('.video-card');
+      const dots = document.querySelectorAll('.video-dot');
+      const prevBtn = document.getElementById('video-prev');
+      const nextBtn = document.getElementById('video-next');
+      let idx = 1;
+      const total = cards.length;
+
+      function render() {
+        const card = cards[0];
+        const cardWidth = card.getBoundingClientRect().width;
+        const gap = parseFloat(getComputedStyle(track).columnGap || 24);
+        const viewport = track.parentElement.getBoundingClientRect().width;
+        const offset = (viewport / 2) - (cardWidth / 2) - idx * (cardWidth + gap);
+        track.style.transform = `translateX(${offset}px)`;
+
+        cards.forEach((c, i) => {
+          if (i === idx) {
+            c.style.transform = 'scale(1.06)';
+            c.style.opacity = '1';
+            c.style.boxShadow = '0 0 0 2px #7B2AE8, 0 20px 40px rgba(123,42,232,0.25)';
+          } else {
+            c.style.transform = 'scale(0.92)';
+            c.style.opacity = '0.55';
+            c.style.boxShadow = 'none';
+          }
+        });
+
+        dots.forEach((d, i) => {
+          d.classList.toggle('bg-white/30', i !== idx);
+          if (i === idx) { d.style.background = '#7B2AE8'; d.style.width = '20px'; }
+          else { d.style.background = ''; d.style.width = ''; }
+        });
+      }
+
+      prevBtn.addEventListener('click', () => { idx = (idx - 1 + total) % total; render(); });
+      nextBtn.addEventListener('click', () => { idx = (idx + 1) % total; render(); });
+      dots.forEach(d => d.addEventListener('click', () => { idx = +d.dataset.idx; render(); }));
+      window.addEventListener('resize', render);
+      render();
+    })();
+  </script>
+</section>
+
 <!-- ─── TEMPO APP ─── -->
 <section id="app" class="py-24 px-6 bg-white section-divider">
   <div class="max-w-[1100px] mx-auto">
